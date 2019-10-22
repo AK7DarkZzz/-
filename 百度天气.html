@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        div{
+            width: 600px;
+            height: 200px;
+            border: solid 1px black;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="./Highcharts-7.2.0/code/highcharts.js"></script>
+    <script>
+        var chart = Highcharts.chart('box',{
+            chart: {
+                type: 'line',
+                backgroundColor: '#ccc',
+            },
+            title: {
+                text: null,
+            },
+            credite: {
+                text: '天气预报',
+                href: 'https://www.baidu.com',
+            },
+            legend: {
+                enabled: false,
+            },
+            xAxis: [{
+                categories:(function(){
+                    var arr = ['现在'];
+                    var date = new Date();
+                    var hour = date.getHours();
+                    for (var i = 1; i <= 8; i++){
+                        var str = hour + 3 * i;
+                        str = str > 24 ? str - 24 : str;
+                        str = str + '';
+                        str = str.length == 2 ? str : 0 + str;
+                        str += '点';
+                        arr.push(str);
+                    }
+                    return arr;
+                })(),
+                labels: {
+                    style: {
+                        coloe: 'white',
+                    }
+                },
+            }],
+            yAxis: [{
+                categories: [1, 8, 15, 20, 25],
+                title:{
+                    text: '',
+                },
+                labels: {
+                    style: {
+                        color: 'white',
+                    },
+                },
+            }],
+            plotOptions:{
+                line: {
+                    color: 'white',
+                },
+                series: {
+                    enabled: true,
+                    format: "{y}℃",
+                    style: {
+                        "color": "white", 
+                        "fontSize": "11px", 
+                        "fontWeight": "bold", 
+                        "textOutline": "0px 1px contrast"
+                    }
+                },
+                marker: {
+                    states: {
+                        hover: {
+                            fillColor: 'skyblue',
+                        },
+                    },
+                },
+            },
+            series: [{
+                type: 'line',
+                data: [18, 17, 21, 22, 14, 12, 10, 7, 11],
+                states: {
+                    hover: {
+                        marker: {
+                            fillColor: 'blue',
+                        },
+                    },
+                }
+            }]
+        });
+    </script>
+</body>
+</html>
